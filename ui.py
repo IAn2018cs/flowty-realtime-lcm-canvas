@@ -16,12 +16,12 @@ with gr.Blocks() as demo:
     with gr.Column():
         with gr.Row():
             with gr.Column():
-                s = gr.Slider(label="steps", minimum=4, maximum=8, step=1, value=4, interactive=True)
-                c = gr.Slider(label="cfg", minimum=0.1, maximum=3, step=0.1, value=1, interactive=True)
+                s = gr.Slider(label="steps", minimum=4, maximum=8, step=1, value=2, interactive=True)
+                c = gr.Slider(label="cfg", minimum=0.0, maximum=3, step=0.1, value=0.0, interactive=True)
                 i_s = gr.Slider(label="sketch strength", minimum=0.1, maximum=0.9, step=0.1, value=0.9, interactive=True)
             with gr.Column():
-                mod = gr.Text(label="Model Hugging Face id (after changing this wait until the model downloads in the console)", value="Lykon/dreamshaper-7", interactive=True)
-                t = gr.Text(label="Prompt", value="Scary warewolf, 8K, realistic, colorful, long sharp teeth, splash art", interactive=True)
+                mod = gr.Text(label="Model Hugging Face id (after changing this wait until the model downloads in the console)", value="stabilityai/sdxl-turbo", interactive=True)
+                t = gr.Text(label="Prompt", value="cat wizard, gandalf, lord of the rings, detailed, fantasy, cute, adorable, Pixar, Disney, 8k", interactive=True)
                 se = gr.Number(label="seed", value=1337, interactive=True)
         with gr.Row(equal_height=True):
             i = gr.Image(source="canvas", tool="color-sketch", shape=(canvas_size, canvas_size), width=canvas_size, height=canvas_size, type="pil")
@@ -56,4 +56,4 @@ if __name__ == "__main__":
     # If the option python ui.py --share is attached, it will be deployed to Gradio
     parser.add_argument("--share", action="store_true", help="Deploy on Gradio for sharing", default=False)
     args = parser.parse_args()
-    demo.launch(share=args.share)
+    demo.launch(share=args.share, server_name='0.0.0.0', server_port=7855)

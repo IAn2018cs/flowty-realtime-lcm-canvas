@@ -69,10 +69,10 @@ def load_models(model_id="Lykon/dreamshaper-7"):
             safety_checker=None
         )
 
-    pipe.scheduler = LCMScheduler.from_config(pipe.scheduler.config)
-
-    pipe.load_lora_weights(lcm_lora_id)
-    pipe.fuse_lora()
+    # pipe.scheduler = LCMScheduler.from_config(pipe.scheduler.config)
+    #
+    # pipe.load_lora_weights(lcm_lora_id)
+    # pipe.fuse_lora()
 
     device = "mps" if is_mac else "cuda"
 
@@ -83,8 +83,8 @@ def load_models(model_id="Lykon/dreamshaper-7"):
     def infer(
             prompt,
             image,
-            num_inference_steps=4,
-            guidance_scale=1,
+            num_inference_steps=2,
+            guidance_scale=0.0,
             strength=0.9,
             seed=random.randrange(0, 2**63)
     ):
