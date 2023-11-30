@@ -74,10 +74,8 @@ def load_models(model_id="stabilityai/sdxl-turbo"):
 
     def infer(
             prompt,
-            image,
             num_inference_steps=2,
             guidance_scale=0.0,
-            strength=0.9,
             seed=random.randrange(0, 2**63)
     ):
         with torch.inference_mode():
@@ -85,11 +83,9 @@ def load_models(model_id="stabilityai/sdxl-turbo"):
                 with timer("inference"):
                     return pipe(
                         prompt=prompt,
-                        image=load_image(image),
                         generator=generator.manual_seed(seed),
                         num_inference_steps=num_inference_steps,
-                        guidance_scale=guidance_scale,
-                        strength=strength
+                        guidance_scale=guidance_scale
                     ).images[0]
 
     return infer
